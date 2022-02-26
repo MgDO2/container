@@ -1,0 +1,13 @@
+save data
+add new data-"+="
+pop data at the end-"--"
+connect other container-".connect()"
+auto free memory
+insert-"()"
+get data-"[]"
+return a "adress" of data-".direction"
+return pointer of start-".start()"
+return pointer of end-".end()"
+get the size of container-".size()"
+determine whether it is the same-"=="
+Overlay content-"="
