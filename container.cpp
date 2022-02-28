@@ -2,6 +2,11 @@
 #include <algorithm>
 using namespace std;
 
+/*
+so don't include this file because you can't use it, if you want to use it,
+include the head file!
+*/
+
 namespace ctr {
     template<class type>
     class container {
