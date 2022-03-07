@@ -3,15 +3,15 @@
 using namespace std;
 
 /*
-so don't include this file because you can't use it, if you want to use it,
-include the head file!
+to use it, you must to use namespace ctr.
+and, don't include this file! include "container.h".
 */
-
 
 namespace ctr{
   template<class type>
   class container{
     public:
+      container(int len);
       int size();
       void connect(container<type> a);
       void swap(type& i,type& j);
@@ -28,10 +28,25 @@ namespace ctr{
       void operator--(type);
       void delete_ind(int ind);
       void replace(int i,type n);
+      void free();
+      double sum();
+      ~container();
     private:
       type* p=NULL;
       int lengh=0;
   };
+
+  template<class type>
+  container<type>::~container(){
+    delete [] p;
+    lengh=0;
+  }
+
+  template<class type>
+  container<type>::container(int len){
+    lengh=len;
+    p= new type[lengh];
+  }
 
   template<class type>
   void container<type>::insert(int ind,type n){
@@ -190,8 +205,21 @@ namespace ctr{
   void container<type>::replace(int i,type n){
     *(p+i)=n;
   }
-}
 
-int main() {
-    return 0;
+  template<class type>
+  double container<type>::sum(){
+    double a=0;
+    if(sizeof(p[0])!=1){
+      for(int i=0;i<lengh;i++){
+        a+=p[i];
+      }
+    }
+    else{return -10e8;}
+    return a;
+  }
+
+  template<class type>
+  void container<type>::free(){
+    delete [] p;
+  }
 }
