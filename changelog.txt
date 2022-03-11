@@ -1,2 +1,8 @@
-#version 1.0.0
+#version 3
 updata. 
+
+#version 3.14
+add new functions and operator more symbol.
+
+#version 3.14.15
+add output function
