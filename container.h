@@ -11,6 +11,7 @@ namespace ctr{
   class container{
     public:
       container(int len);
+      container();
       int size();
       void connect(container<type> a);
       void swap(type& i,type& j);
@@ -21,19 +22,69 @@ namespace ctr{
       type operator[](int i); 
       void insert(int i,type n);
       bool operator==(container<type> a);
-      void operator=(container<type> a);
+      void put(int i,type a){
+        p[i]=a;
+      }
+      void cover(container<type> a);
+      bool operator>(container<type> a){
+        return this->lengh>a.size();
+      }
+      bool operator<(container<type> a){
+        return this->lengh<a.size();
+      }
       void operator+=(type a);
       int operator++(type);
       void operator--(type);
       void delete_ind(int ind);
       void replace(int i,type n);
+      int in_int();
       void free();
       double sum();
+      void out(int a);
       ~container();
     private:
       type* p=NULL;
       int lengh=0;
   };
+
+  template<class type>
+  void container<type>::out(int a){
+    if(a==0){
+          for(int i=0;i<lengh;i++){
+          cout<<p[i]<<" ";
+          }
+          cout<<endl;
+        }
+        else if(a==1){
+          for(int i=0;i<lengh;i++){
+          cout<<p[i]<<endl;
+          }
+        }
+        else if(a==2){
+          for(int i=0;i<lengh;i++){
+          cout<<p[i];
+          }
+          cout<<endl;
+        }
+        else{
+          for(int i=0;i<lengh;i++){
+          cout<<p[i]<<" ";
+          }
+          cout<<endl;
+        }
+  }
+
+  template<class type>
+  int container<type>::in_int(){
+    int in=0;
+    if(sizeof(type)==4){
+      for(int i=0;i<lengh;i++){
+        in*=10;
+        in+=p[i];
+      }
+    }
+    return in;
+  }
 
   template<class type>
   container<type>::~container(){
@@ -46,6 +97,9 @@ namespace ctr{
     lengh=len;
     p= new type[lengh];
   }
+
+  template<class type>
+  container<type>::container(){}
 
   template<class type>
   void container<type>::insert(int ind,type n){
@@ -135,7 +189,7 @@ namespace ctr{
   }
 
   template<class type>
-  void container<type>::operator=(container<type> a){
+  void container<type>::cover(container<type> a){
     delete [] p;
     p=new type[a.lengh];
     for(int i=0;i<a.lengh;i++){
@@ -161,7 +215,18 @@ namespace ctr{
 
   template<class type>
   int container<type>::operator++(type){
-    lengh++;
+    type* ip=NULL;
+    ip=new type[++lengh];
+    for(int i=0;i<lengh-1;i++){
+      ip[i]=p[i];
+    }
+    ip[lengh-1]=0;
+    delete [] p;
+    p=new type[lengh];
+    for(int i=0;i<lengh;i++){
+      p[i]=ip[i];
+    }
+    delete [] ip;
     return lengh-1;
   }
 
